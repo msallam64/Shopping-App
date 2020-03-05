@@ -58,17 +58,16 @@
         app:textSize="18dp">
 
     </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_product_to_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="6dp"
-        android:backgroundTint="#FFFF"
-        android:src="@drawable/nav_cart"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:layout_alignParentEnd="true" />
-
+<Button
+    android:id="@+id/pd_add_to_cart_btn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="17dp"
+    android:background="@color/colorPrimaryDark"
+    android:layout_alignParentBottom="true"
+    android:text="Add To Cart"
+    android:textColor="#FFFF"
+    android:textSize="19sp"
+    />
 
 </RelativeLayout>
