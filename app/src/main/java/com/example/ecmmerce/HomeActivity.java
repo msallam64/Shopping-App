@@ -71,8 +71,10 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTV = headerView.findViewById(R.id.user_profile_name);
-        CircleImageView profileImageView = navigationView.findViewById(R.id.profile_image);
+        CircleImageView profileImageView = headerView.findViewById(R.id.profile_image);
         userNameTV.setText(Prevalent.currentonlineusers.getName());
+
+        Picasso.get().load(Prevalent.currentonlineusers.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         recyclerView=findViewById(R.id.rececler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager=new LinearLayoutManager(this);
@@ -88,11 +90,20 @@ public class HomeActivity extends AppCompatActivity
         FirebaseRecyclerAdapter<Product, ProductViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Product, ProductViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull Product product) {
+                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Product product) {
                         holder.productNameTV.setText(product.getpName());
                         holder.productPrice.setText("Price = "+product.getPrice()+" $");
                         holder.productDiscriptionTV.setText(product.getDescription());
                         Picasso.get().load(product.getImage()).into(holder.imageView);
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent=new Intent(HomeActivity.this,ProductDetailsActivity.class);
+                                intent.putExtra("pid",product.getPid());
+                                startActivity(intent);
+
+                            }
+                        });
 
 
                     }

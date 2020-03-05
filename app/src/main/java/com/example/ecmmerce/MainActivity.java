@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             progressDialog.dismiss();
-                            Toast.makeText(MainActivity.this, "Password Incorrect..!", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(MainActivity.this, "Password Incorrect..!", Toast.LENGTH_LONG).show();
                         }
 
                     }
