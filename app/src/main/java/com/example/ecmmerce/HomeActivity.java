@@ -58,8 +58,8 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -75,9 +75,9 @@ public class HomeActivity extends AppCompatActivity
         userNameTV.setText(Prevalent.currentonlineusers.getName());
 
         Picasso.get().load(Prevalent.currentonlineusers.getImage()).placeholder(R.drawable.profile).into(profileImageView);
-        recyclerView=findViewById(R.id.rececler_menu);
+        recyclerView = findViewById(R.id.rececler_menu);
         recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -92,14 +92,14 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int i, @NonNull final Product product) {
                         holder.productNameTV.setText(product.getpName());
-                        holder.productPrice.setText("Price = "+product.getPrice()+" $");
+                        holder.productPrice.setText("Price = " + product.getPrice() + " $");
                         holder.productDiscriptionTV.setText(product.getDescription());
                         Picasso.get().load(product.getImage()).into(holder.imageView);
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent=new Intent(HomeActivity.this,ProductDetailsActivity.class);
-                                intent.putExtra("pid",product.getPid());
+                                Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                intent.putExtra("pid", product.getPid());
                                 startActivity(intent);
 
                             }
@@ -159,13 +159,14 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_cart) {
-            // Handle the camera action
+            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_orders) {
 
         } else if (id == R.id.nav_categories) {
 
         } else if (id == R.id.nav_settings) {
-            Intent intent=new Intent(HomeActivity.this,SettingsActivity.class);
+            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_logout) {

@@ -92,6 +92,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         }
                     });
 
+
                 }
             }
         });
@@ -108,7 +109,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     Product products = dataSnapshot.getValue(Product.class);
                     productName.setText(products.getpName());
                     productDescription.setText(products.getDescription());
-                    productPrice.setText(products.getPrice() + " $");
+                    productPrice.setText(products.getPrice());
                     Picasso.get().load(products.getImage()).into(productImage);
 
                 }
