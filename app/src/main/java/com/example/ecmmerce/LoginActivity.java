@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         adminLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginbtn.setText("Login AS Admin");
+                loginbtn.setText("Login aS Admin");
                 adminLink.setVisibility(View.INVISIBLE);
                 notAdminLink.setVisibility(View.VISIBLE);
                 parentDBName = "Admins";
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Done Logged In..!", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                Prevalent.currentonlineusers=userdata;
+                                Prevalent.currentonlineusers = userdata;
                                 startActivity(intent);
                             }
                         } else {

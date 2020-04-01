@@ -36,6 +36,19 @@
             android:textSize="22sp" />
 
     </RelativeLayout>
+    <TextView
+        android:id="@+id/msg1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:text="Congratulation , Your Order Vierfied"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_list_rv"
