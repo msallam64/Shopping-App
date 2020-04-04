@@ -44,11 +44,18 @@ public class HomeActivity extends AppCompatActivity
     private DatabaseReference productRef;
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            type = getIntent().getExtras().getString("admin").toString();
+
+        }
         productRef = FirebaseDatabase.getInstance().getReference().child("Products");
         Paper.init(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -72,9 +79,10 @@ public class HomeActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTV = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.profile_image);
-        userNameTV.setText(Prevalent.currentonlineusers.getName());
-
-        Picasso.get().load(Prevalent.currentonlineusers.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+       if (!type.equals("admin")){
+           userNameTV.setText(Prevalent.currentonlineusers.getName());
+           Picasso.get().load(Prevalent.currentonlineusers.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+       }
         recyclerView = findViewById(R.id.rececler_menu);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -95,17 +103,22 @@ public class HomeActivity extends AppCompatActivity
                         holder.productPrice.setText("Price = " + product.getPrice() + " $");
                         holder.productDiscriptionTV.setText(product.getDescription());
                         Picasso.get().load(product.getImage()).into(holder.imageView);
+
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                intent.putExtra("pid", product.getPid());
-                                startActivity(intent);
+                                if (type.equals("admin")) {
+                                    Intent intent = new Intent(HomeActivity.this,AdminMaintainProductActivity.class);
+                                    intent.putExtra("pid", product.getPid());
+                                    startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                    intent.putExtra("pid", product.getPid());
+                                    startActivity(intent);
+                                }
 
                             }
                         });
-
-
                     }
 
                     @NonNull
@@ -161,7 +174,10 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_cart) {
             Intent intent = new Intent(HomeActivity.this, CartActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_orders) {
+        } else if (id == R.id.nav_search) {
+            Intent intent = new Intent(HomeActivity.this, SearchProductActivity.class);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_categories) {
 
