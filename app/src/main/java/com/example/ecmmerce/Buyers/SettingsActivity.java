@@ -1,20 +1,21 @@
-package com.example.ecmmerce;
+package com.example.ecmmerce.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ecmmerce.Prevalent.Prevalent;
+import com.example.ecmmerce.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,12 +43,14 @@ public class SettingsActivity extends AppCompatActivity {
     private StorageTask uploadTask;
     private StorageReference storeprofilePictureRef;
     private String checer = "";
+    private Button securityQuestionsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         storeprofilePictureRef= FirebaseStorage.getInstance().getReference().child("Profile Picture ");
         setContentView(R.layout.activity_settings);
+        securityQuestionsBtn=findViewById(R.id.security_questions_btn);
         profileImageView = findViewById(R.id.setting_profileimage);
         fullnameET = findViewById(R.id.setting_full_name);
         userPhoneET = findViewById(R.id.setting_phone_number);
@@ -56,6 +59,14 @@ public class SettingsActivity extends AppCompatActivity {
         closetextbtn = findViewById(R.id.close_setting);
         savetextbtn = findViewById(R.id.updte_setting);
         userInfoDisplay(profileImageView, fullnameET, userPhoneET, adressET);
+        securityQuestionsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SettingsActivity.this,ResetPasswordActivity.class);
+                intent.putExtra("check","setting");
+                startActivity(intent);
+            }
+        });
         closetextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

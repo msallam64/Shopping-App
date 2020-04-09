@@ -1,4 +1,4 @@
-package com.example.ecmmerce;
+package com.example.ecmmerce.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ecmmerce.Model.Product;
+import com.example.ecmmerce.R;
 import com.example.ecmmerce.ViewHolder.ProductViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

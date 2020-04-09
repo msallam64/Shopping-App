@@ -9,23 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminMaintainProductActivity"></activity>
-        <activity android:name=".SearchProductActivity" />
-        <activity android:name=".AdminUserProductActivity" />
-        <activity android:name=".AdminNewOrdersActivity" />
-        <activity android:name=".ConfirmFinalOrderActivity" />
-        <activity android:name=".CartActivity" />
-        <activity android:name=".ProductDetailsActivity" />
-        <activity android:name=".SettingsActivity" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Sellers.SellerHomeActivity"
+            android:label="@string/title_activity_seller_home"></activity>
+        <activity android:name=".Sellers.SellerLoginActivity" />
+        <activity android:name=".Sellers.SellerRegestrationActivity" />
+        <activity android:name=".Buyers.ResetPasswordActivity" />
+        <activity android:name=".Admin.AdminMaintainProductActivity" />
+        <activity android:name=".Buyers.SearchProductActivity" />
+        <activity android:name=".Admin.AdminUserProductActivity" />
+        <activity android:name=".Admin.AdminNewOrdersActivity" />
+        <activity android:name=".Buyers.ConfirmFinalOrderActivity" />
+        <activity android:name=".Buyers.CartActivity" />
+        <activity android:name=".Buyers.ProductDetailsActivity" />
+        <activity android:name=".Buyers.SettingsActivity" />
+        <activity
+            android:name=".Buyers.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AdminCategoryActivity" />
-        <activity android:name=".AdminAddProductActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Admin.AdminCategoryActivity" />
+        <activity android:name=".Admin.AdminAddProductActivity" />
+        <activity android:name=".Buyers.RegisterActivity" />
+        <activity android:name=".Buyers.LoginActivity" />
+        <activity android:name=".Buyers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,8 +42,8 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

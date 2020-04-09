@@ -1,4 +1,4 @@
-package com.example.ecmmerce;
+package com.example.ecmmerce.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ecmmerce.Admin.AdminCategoryActivity;
 import com.example.ecmmerce.Model.Users;
 import com.example.ecmmerce.Prevalent.Prevalent;
+import com.example.ecmmerce.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginbtn;
     private ProgressDialog progressDialog;
     private CheckBox chboxremmberme;
-    TextView adminLink, notAdminLink;
+    TextView adminLink, notAdminLink, forgetPassword;
     private String parentDBName = "Users";
 
 
@@ -37,12 +39,21 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        forgetPassword = findViewById(R.id.forrgetpass);
         inputnumber = findViewById(R.id.login_phone_number);
         inputpassword = findViewById(R.id.login_password);
         loginbtn = findViewById(R.id.login_btn);
         progressDialog = new ProgressDialog(this);
         adminLink = findViewById(R.id.admin_link);
         notAdminLink = findViewById(R.id.not_admin_link);
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                intent.putExtra("check", "login");
+                startActivity(intent);
+            }
+        });
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         adminLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginbtn.setText("Login aS Admin");
+                loginbtn.setText("Login aS com.example.ecmmerce.Admin");
                 adminLink.setVisibility(View.INVISIBLE);
                 notAdminLink.setVisibility(View.VISIBLE);
                 parentDBName = "Admins";
@@ -109,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (userdata.getPhone().equals(phone)) {
                         if (userdata.getPassword().equals(password)) {
                             if (parentDBName.equals("Admins")) {
-                                Toast.makeText(LoginActivity.this, "Admin Done Logged In..!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "com.example.ecmmerce.Admin Done Logged In..!", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
                                 startActivity(intent);

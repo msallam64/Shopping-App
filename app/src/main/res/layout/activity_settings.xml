@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context=".Buyers.SettingsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_setting"
@@ -90,4 +90,15 @@
         android:hint="Address"
         android:layout_margin="15dp"
         android:padding="10dp"/>
+    <Button
+        android:id="@+id/security_questions_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setting_address"
+        android:hint="Set Security Questions"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:textColorHint="#FFFF"/>
+
 </RelativeLayout>

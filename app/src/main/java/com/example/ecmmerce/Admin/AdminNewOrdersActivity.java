@@ -1,4 +1,4 @@
-package com.example.ecmmerce;
+package com.example.ecmmerce.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ecmmerce.Model.AdminOrders;
+import com.example.ecmmerce.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;

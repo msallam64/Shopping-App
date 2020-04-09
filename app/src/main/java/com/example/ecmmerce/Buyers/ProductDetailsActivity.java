@@ -1,4 +1,4 @@
-package com.example.ecmmerce;
+package com.example.ecmmerce.Buyers;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +14,9 @@ import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.ecmmerce.Model.Product;
 import com.example.ecmmerce.Prevalent.Prevalent;
+import com.example.ecmmerce.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -92,7 +92,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    cartListRef.child("Admin View").child(Prevalent.currentonlineusers.getPhone()).child("Products")
+                    cartListRef.child("com.example.ecmmerce.Admin View").child(Prevalent.currentonlineusers.getPhone()).child("Products")
                             .child(productID).updateChildren(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

@@ -1,4 +1,4 @@
-package com.example.ecmmerce;
+package com.example.ecmmerce.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ecmmerce.Model.Cart;
+import com.example.ecmmerce.R;
 import com.example.ecmmerce.ViewHolder.CartViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -33,7 +34,7 @@ public class AdminUserProductActivity extends AppCompatActivity {
         productList.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         productList.setLayoutManager(layoutManager);
-        cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("Admin View")
+        cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List").child("com.example.ecmmerce.Admin View")
                 .child(userId).child("Products");
 
 
