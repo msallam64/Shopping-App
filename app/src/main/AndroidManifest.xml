@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Admin.AdminCheckNewProductsActivity"></activity>
+        <activity android:name=".Admin.AdminHomeActivity" />
         <activity
             android:name=".Sellers.SellerHomeActivity"
-            android:label="@string/title_activity_seller_home"></activity>
+            android:label="@string/title_activity_seller_home" />
         <activity android:name=".Sellers.SellerLoginActivity" />
         <activity android:name=".Sellers.SellerRegestrationActivity" />
         <activity android:name=".Buyers.ResetPasswordActivity" />
@@ -27,8 +29,8 @@
             android:name=".Buyers.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Admin.AdminCategoryActivity" />
-        <activity android:name=".Admin.AdminAddProductActivity" />
+        <activity android:name=".Sellers.SellerProductCategoryActivity" />
+        <activity android:name=".Sellers.SellerAddNewProductActivity" />
         <activity android:name=".Buyers.RegisterActivity" />
         <activity android:name=".Buyers.LoginActivity" />
         <activity android:name=".Buyers.MainActivity">

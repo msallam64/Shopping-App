@@ -14,7 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ecmmerce.Admin.AdminCategoryActivity;
+import com.example.ecmmerce.Admin.AdminHomeActivity;
+import com.example.ecmmerce.Sellers.SellerProductCategoryActivity;
 import com.example.ecmmerce.Model.Users;
 import com.example.ecmmerce.Prevalent.Prevalent;
 import com.example.ecmmerce.R;
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputnumber, inputpassword;
     private Button loginbtn;
     private ProgressDialog progressDialog;
-    private CheckBox chboxremmberme;
+    //private CheckBox chboxremmberme;
     TextView adminLink, notAdminLink, forgetPassword;
     private String parentDBName = "Users";
 
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         adminLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginbtn.setText("Login aS com.example.ecmmerce.Admin");
+                loginbtn.setText("Login as Admin");
                 adminLink.setVisibility(View.INVISIBLE);
                 notAdminLink.setVisibility(View.VISIBLE);
                 parentDBName = "Admins";
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        chboxremmberme = findViewById(R.id.remmemberme);
+        //chboxremmberme = findViewById(R.id.remmemberme);
         Paper.init(this);
 
 
@@ -104,12 +105,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void allowaccessaccount(final String phone, final String password) {
-        if (chboxremmberme.isChecked()) {
-            Paper.book().write(Prevalent.userphonekey, phone);
-            Paper.book().write(Prevalent.userpasswordkey, password);
-
-
-        }
+//        if (chboxremmberme.isChecked()) {
+//            Paper.book().write(Prevalent.userphonekey, phone);
+//            Paper.book().write(Prevalent.userpasswordkey, password);
+//        }
         final DatabaseReference Rootref;
         Rootref = FirebaseDatabase.getInstance().getReference();
         Rootref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -120,9 +119,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (userdata.getPhone().equals(phone)) {
                         if (userdata.getPassword().equals(password)) {
                             if (parentDBName.equals("Admins")) {
-                                Toast.makeText(LoginActivity.this, "com.example.ecmmerce.Admin Done Logged In..!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Admin Done Logged In..!", Toast.LENGTH_LONG).show();
                                 progressDialog.dismiss();
-                                Intent intent = new Intent(LoginActivity.this, AdminCategoryActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
                                 startActivity(intent);
                             } else if (parentDBName.equals("Users")) {
                                 Toast.makeText(LoginActivity.this, "Done Logged In..!", Toast.LENGTH_LONG).show();

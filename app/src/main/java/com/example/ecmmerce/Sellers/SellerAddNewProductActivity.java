@@ -1,4 +1,4 @@
-package com.example.ecmmerce.Admin;
+package com.example.ecmmerce.Sellers;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +21,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -31,7 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class AdminAddProductActivity extends AppCompatActivity {
+public class SellerAddNewProductActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private String categoryname, discription, price, pname,
             savecurrentdate, savecurrenttime;
@@ -42,16 +46,19 @@ public class AdminAddProductActivity extends AppCompatActivity {
     private Uri imageuri;
     private String productRandomKey, downloadImageUrl;
     private StorageReference productimagesref;
-    private DatabaseReference productRef;
+    private DatabaseReference productRef, sellersRef;
+    private String sName, sAddress, sPhone, sEmail, sId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_seller_add_new_product);
         progressDialog = new ProgressDialog(this);
         categoryname = getIntent().getExtras().get("category").toString().trim();
         productimagesref = FirebaseStorage.getInstance().getReference().child("Product Images");
         productRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        sellersRef = FirebaseDatabase.getInstance().getReference().child("Sellers");
+
 
         addNewProduct = findViewById(R.id.add_new_product);
         productimage = findViewById(R.id.select_image_product);
@@ -70,6 +77,25 @@ public class AdminAddProductActivity extends AppCompatActivity {
                 valdateProductData();
             }
         });
+        sellersRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            sName = dataSnapshot.child("name").getValue().toString();
+                            sEmail = dataSnapshot.child("email").getValue().toString();
+                            sPhone = dataSnapshot.child("phone").getValue().toString();
+                            sAddress = dataSnapshot.child("address").getValue().toString();
+                            sId = dataSnapshot.child("sid").getValue().toString();
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
     }
@@ -117,13 +143,13 @@ public class AdminAddProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 String Error = e.toString();
-                Toast.makeText(AdminAddProductActivity.this, "Error : " + Error, Toast.LENGTH_LONG).show();
+                Toast.makeText(SellerAddNewProductActivity.this, "Error : " + Error, Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(AdminAddProductActivity.this, "Image Upload Successful..", Toast.LENGTH_LONG).show();
+                Toast.makeText(SellerAddNewProductActivity.this, "Image Upload Successful..", Toast.LENGTH_LONG).show();
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -138,8 +164,8 @@ public class AdminAddProductActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         if (task.isSuccessful()) {
-                            downloadImageUrl=task.getResult().toString();
-                            Toast.makeText(AdminAddProductActivity.this,
+                            downloadImageUrl = task.getResult().toString();
+                            Toast.makeText(SellerAddNewProductActivity.this,
                                     "Image URL Save To DataBase Successful...", Toast.LENGTH_SHORT).show();
                             saveProductInfoToDataBase();
                         }
@@ -162,19 +188,26 @@ public class AdminAddProductActivity extends AppCompatActivity {
         productmap.put("price", price);
         productmap.put("pname", pname);
 
+        productmap.put("sellername", sName);
+        productmap.put("selleraddress", sAddress);
+        productmap.put("sellerphone", sPhone);
+        productmap.put("selleremail", sEmail);
+        productmap.put("sellerid", sId);
+        productmap.put("productstate", "not approved");
+
         productRef.child(productRandomKey).updateChildren(productmap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(AdminAddProductActivity.this, AdminCategoryActivity.class);
+                            Intent intent = new Intent(SellerAddNewProductActivity.this, SellerHomeActivity.class);
                             startActivity(intent);
                             progressDialog.dismiss();
-                            Toast.makeText(AdminAddProductActivity.this, "Product is Add Success...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SellerAddNewProductActivity.this, "Product is Add Success...", Toast.LENGTH_SHORT).show();
                         } else {
                             progressDialog.dismiss();
                             String Error = task.getException().toString();
-                            Toast.makeText(AdminAddProductActivity.this, "Error : " + Error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SellerAddNewProductActivity.this, "Error : " + Error, Toast.LENGTH_SHORT).show();
                         }
 
                     }
