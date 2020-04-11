@@ -1,13 +1,13 @@
 package com.example.ecmmerce.Model;
 
 public class Product {
-    private String pName,description,price,image,category,pid,date,time;
+    private String pname,description,price,image,category,pid,date,time,productstate;
 
     public Product() {
     }
 
-    public Product(String pName, String description, String price, String image, String category, String pid, String date, String time) {
-        this.pName = pName;
+    public Product(String pname, String description, String price, String image, String category, String pid, String date, String time, String productstate) {
+        this.pname = pname;
         this.description = description;
         this.price = price;
         this.image = image;
@@ -15,22 +15,23 @@ public class Product {
         this.pid = pid;
         this.date = date;
         this.time = time;
+        this.productstate = productstate;
     }
 
-    public String getpName() {
-        return pName;
+    public String getPname() {
+        return pname;
     }
 
-    public void setpName(String pName) {
-        this.pName = pName;
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDiscription(String discription) {
-        this.description = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPrice() {
@@ -79,5 +80,13 @@ public class Product {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getProductstate() {
+        return productstate;
+    }
+
+    public void setProductstate(String productstate) {
+        this.productstate = productstate;
     }
 }
